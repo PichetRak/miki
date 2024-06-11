@@ -1,0 +1,33 @@
+<nav class="navbar fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-fluid">
+    <%# <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> %>
+    <%# <div class="collapse navbar-collapse" id="navbarScroll"> %>
+      <%# <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item"> %>
+          <%= link_to "MIKI", root_path(), class: "nav-link active", "aria-current": "page" , data: { turbo: false } %>
+        <%# </li>
+        <li class="nav-item"> %>
+          <%= link_to "กระดานพูดคุย", forum_path(), class: "nav-link", data: { turbo: false } %>
+        <%# </li>
+        <li class="nav-item dropdown"> %>
+          <%= link_to "วิเคราะห์ความซึมเศร้า", analysis_depression_path(), class: "nav-link", data: { turbo: false } %>
+          <% if session["current_user"].present? %>
+            <% if session["current_user"]["role"] != 2 %>
+              <%= link_to "User", user_path(), class: "nav-link", data: { turbo: false } %>
+            <% end %>
+          <% end %>
+        <%# </li>
+      </ul> %>
+
+
+      <%= button_to logout_path, method: :post, class: "btn btn-secondary", id: "btn-logout", style: "position: absolute;" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+          <path d="M7.5 1v7h1V1h-1z"/>
+          <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+        </svg>
+      <% end %>
+    <%# </div> %>
+  </div>
+</nav>

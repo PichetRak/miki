@@ -1,0 +1,7 @@
+<% if @is_today %>
+    <%= line_chart( @data, id: "depression-chart") %>
+<% else %>
+    <%= line_chart( @data.map { |k, v| { name: k, data: v } }, id: "depression-chart" ) %>
+<% end %>
+
+<%= hidden_field(:analysis_result, :result_graph, id: "analysis_result", value: @risk_result.join(",")) %>

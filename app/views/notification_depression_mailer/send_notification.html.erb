@@ -1,0 +1,17 @@
+<p>ถึง คุณครูประจำชั้นมัธยมศึกษาปีที่ <%= @student["classroom"] %> </p>
+<br>
+<p>
+  ผลการสอบถามภาวะซึมเศร้าของ <%= @student["firstname"] %> <%= @student["lastname"] %> ได้ผลลัพทธ์ดังนี้
+</p>
+<% sort_ans = @answer.sort_by{ |k, v| k } %>
+<% sum = 0 %>
+<% sort_ans.each do |question, ans| %>
+  <p>Q: <%= @question["depression_survey/survey_#{question}.wav"] %></p>
+  <p>A: <%= ans %></p>
+  <%# sum += answer.to_i%>
+<% end %>
+
+<%# ผมรวมคะแนน: %>
+
+<br>
+<p>Thanks for joining and have a great day!</p>

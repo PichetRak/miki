@@ -1,0 +1,16 @@
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="confirmDeleteModalLabel">ยืนยันการลบ</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">คุณแน่ใจใช่ไหมที่ต้องการลบข้อมูลนี้</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-action="click->user#delete" id="btn-confirm-delete">ลบ</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+</div>

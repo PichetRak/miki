@@ -1,0 +1,22 @@
+<% is_logged_in? %>
+<div class="container text-center">
+    <div class="row">
+        <div class="col div-main-menu">
+
+        </div>
+        <div class="col-6">
+            <div id="div-listening-icon"></div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<div data-controller="dashboard" id="div-dashboard-content">
+    <%# <iframe src="" id="init_audio" onended="test()"></iframe> %>
+    <%= content_tag(:canvas, "", data: {'dashboard-target': "params", info: @first_login}, id: "ai-character") %>
+    <%#= render partial: 'character', login: @first_login %>
+    <%= render 'microphone' %>
+    <div id="div-user-speak"></div>
+</div>
+
+<%# render 'choose_character' if session[:current_user]['character'].blank? %>

@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <table class="table-content">
+            <head>
+                <tr>
+                    <th>Question</th>
+                </tr>
+            </head>
+            <body>
+                <tr class="odd">
+                    <td>
+                        <% red, green, blue = @fake_char["color"].split(' ') %>
+                        <div class="div-user-pic" style="background: rgb(<%= red %>, <%= green %>, <%= blue %>)">
+                            <img class="user-pic" height="60px" width="60px" src="/fake_user_pic/<%= @fake_char["user"] %>.png">
+                        </div>
+                        <div class="div-question-data"> 
+                            <span class="text-question"><%= @question_data.question %></span>
+                            <div class="div-tag">
+                                <% if @question_data.tag_id.present? %>
+                                    <% @question_data.tag_id.split(',').each do |t| %>
+                                        <span class="badge text-bg-tag tag-<%= t %>"><%= @tag[t.to_i].tag_th %></span>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </body>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" data-controller="comment">
+        <%= render "comment" %>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="form-comment">
+            <%= form_for @comment, url: forum_questions_create_comment_path(format: :json, own_char: @fake_char, question_id: params[:question]), method: :POST do |f| %>
+                <%= f.text_area :comment, :rows => 4, :cols => 50, class: "form-control text-question", required: true %>
+                <div class="div-btn-submit">
+                    <%= f.submit "Comment", class: "btn btn-mnr" %>
+                    <%= link_to "Cancel", forum_path(), class: "btn btn_cancel" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

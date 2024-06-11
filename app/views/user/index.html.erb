@@ -1,0 +1,36 @@
+<div class="div-body-content">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12" id="grid-title">
+                <div class="div-text-title"><h5>User</h5></div>
+            </div>
+        </div>
+        
+            <div class="row">
+                <div class="col-sm-8 text-start d-inline-flex mb-4">
+                    <% if @all_classroom.present? %>
+                        <span for="select-classroom" class="text-start" style="align-content: center">ชั้นมัธยมศึกษาปีที่:</span>&nbsp
+                        <%= select_tag("class", options_for_select(@all_classroom), { id:"select-classroom", class: "form-select", 'data-controller': "select-classroom", 'data-action': "change->select-classroom#change_classroom", 'data-select-classroom-target': "classroom"}) %>
+                    <% end %>
+                </div>
+                <div class="col-sm-4 text-end d-none mb-4" id="div-btn-all-action" style="justify-content: right;">
+                    <%= button_tag class: "btn btn-primary text-center btn-class-up me-2", 'data-bs-toggle': "modal", 'data-bs-target': "#classUpModal", 'data-action': "click->user#set_id_classup" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708z"/>
+                        </svg>
+                        เลื่อนชั้นทั้งหมด
+                    <% end %>
+                    <%= button_tag class: "btn btn-primary text-center btn-delete", 'data-bs-toggle': "modal", 'data-bs-target': "#confirmDeleteModal", 'data-action': "click->user#set_id_delete" do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                        </svg>
+                        ลบทั้งหมด
+                    <% end %>
+                </div>
+            </div>
+        
+        <div id="div-table-user-list">
+            <%= render partial: "table" %>
+        </div>
+    </div>
+</div>

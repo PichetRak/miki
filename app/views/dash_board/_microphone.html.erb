@@ -1,0 +1,265 @@
+<div class="container text-center">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <button id="mic" onclick="startRecording()" data-dashboard-target="params" data-action="click->dashboard#thinking" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+            </svg>
+        </button>
+        <div id="mic_off" onclick="stopRecording()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-stop" viewBox="0 0 16 16">
+                <path d="M3.5 5A1.5 1.5 0 0 1 5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5zM5 4.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V5a.5.5 0 0 0-.5-.5H5z"/>
+            </svg>
+        </div>
+        <%= button_tag "stop", type:"button", id: "set-ai-talk", data: {'dashboard-target': "params", action: "click->dashboard#stop_and_talk"}, style: "display: none" %>
+        <%= button_tag "default", type:"button", id: "set-ai-default", data: {'dashboard-target': "params", action: "click->dashboard#default"}, style: "display: none" %>
+    </div>
+    <div class="col" style="z-index: 99">
+        <div id="div-sound"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script type="text/javascript">
+    document.getElementById("mic_off").style.display = "none";
+    
+    var gumStream;
+    //stream from getUserMedia() 
+    var rec;
+    
+    var my_timeout;
+
+    function startRecording() {  
+        //Recorder.js object 
+        var input;
+        //MediaStreamAudioSourceNode we'll be recording 
+        // shim for AudioContext when it's not avb. 
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
+        var audioContext = new AudioContext;
+        //new audio context to help us record  
+
+        document.getElementById("mic").style.display = "none";
+        document.getElementById("mic_off").style.display = "inline-grid";
+        console.log("recordButton clicked"); 
+
+        /* Simple constraints object, for more advanced audio features see
+        https://addpipe.com/blog/audio-constraints-getusermedia/ */
+        var constraints = {
+            audio: {
+                sampleRate:16000,
+                channelCount: 2,
+                volume: 1.0,
+                sampleSize: 16
+            },
+            //audio: true,
+            video: false
+        } 
+        https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia */
+
+        navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+            
+            console.log("getUserMedia() success, stream created, initializing Recorder.js ..."); 
+            /* assign to gumStream for later use */
+            gumStream = stream;
+            /* use the stream */
+            input = audioContext.createMediaStreamSource(stream);
+            /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
+            rec = new Recorder(input, {
+                numChannels: 1
+            });
+            //start the recording process 
+            rec.record();
+            console.log("Recording started");
+
+            // Add thinking icon
+            add_listening_icon();
+
+            my_timeout = setTimeout(function() {
+                var mic = document.getElementById("mic");
+                mic.style.display = "inline-grid";
+                mic.disabled = true;
+                document.getElementById("mic_off").style.display = "none";
+                rec.stop(); //stop microphone access 
+                gumStream.getAudioTracks()[0].stop();
+                rec.exportWAV(createDownloadLink);
+                remove_listening_icon();
+            }, 61000);
+        }).catch(function(err) {
+            //enable the record button if getUserMedia() fails 
+        });
+
+    }
+
+    function stopRecording() {
+        clearTimeout(my_timeout);
+        var mic = document.getElementById("mic");
+        mic.style.display = "inline-grid";
+        mic.disabled = true;
+        document.getElementById("mic_off").style.display = "none";
+        console.log("stopButton clicked");
+        //reset button just in case the recording is stopped while paused 
+        rec.stop(); //stop microphone access 
+        gumStream.getAudioTracks()[0].stop();
+        //create the wav blob and pass it on to createDownloadLink 
+        rec.exportWAV(createDownloadLink);
+        remove_listening_icon();
+    }
+
+    function createDownloadLink(blob) { 
+        //webkitURL is deprecated but nevertheless 
+        URL = window.URL || window.webkitURL;
+         
+        var url = URL.createObjectURL(blob);
+        
+        // var li = document.createElement('li');
+        var link = document.createElement('a');
+        //add controls to the <audio> element 
+        
+
+        var today = new Date();
+        var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+        var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
+        var dateTime = date+'_'+time;
+        let au;
+        link.href = url;
+        link.download = dateTime +'.wav';
+        link.innerHTML = link.download;
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(e) {
+            console.log(xhr.response);
+
+            let prompts = xhr.response["prompts"];
+            let prompt_path = "/prompts";
+
+            let audio_index = 0;
+
+            let miki_speak_txt = document.createElement('div');
+            miki_speak_txt.id = "miki-speak";
+            miki_speak_txt.classList.add("speak-txt");
+            miki_speak_txt.style.top = "20%";
+            miki_speak_txt.style.left = "50%";
+            // set_css(miki_speak_txt);
+            miki_speak_txt.innerText = xhr.response["prompt_script"];
+            document.getElementById("div-dashboard-content").insertBefore(miki_speak_txt, document.getElementById("ai-character"));
+
+            if (xhr.response["recognite_txt"] != null){
+                let user_speak_txt = document.createElement('div');
+                user_speak_txt.id = "user-speak"
+                user_speak_txt.classList.add("speak-txt");
+                // user_speak_txt.className += "user-speak speak-txt";
+                user_speak_txt.style.bottom = "5%";
+                user_speak_txt.style.left = "2%";
+                user_speak_txt.style.margin = "20px"
+                // set_css(user_speak_txt);
+                user_speak_txt.innerText = xhr.response["recognite_txt"];
+                // let div_user_speak = document.getElementsByClassName("div-user-speak");
+                // user_speak_txt.style.marginTop = (20*div_user_speak.length)+"px";
+                // if (div_user_speak.length > 5){
+                //     div_user_speak[0].remove();
+                // }
+                document.getElementById("div-user-speak").appendChild(user_speak_txt);
+            }
+
+            // function set_css(div){
+            //     div.style.background = "rgba(255,255,255,0.4)";
+            //     div.style.borderRadius = "10px";
+            //     div.style.position = "fixed";
+            //     div.style.padding = "10px 5px";
+            //     user_speak_txt.style.maxWidth = "500px"
+            // }
+
+            function play_audio(){
+                var au = document.createElement('audio');
+                au.autoplay = true;
+
+                if (audio_index < prompts.length){
+                    try{
+                        au.src = prompt_path+"/"+prompts[audio_index];
+                    }catch{
+                        au.src = prompt_path+"/retry1.wav";
+                    }
+                    au.play();
+                    
+                    au.addEventListener("ended", function() {
+                        audio_index += 1;
+                        play_audio()
+                    });
+                }else{
+                    document.getElementById("set-ai-default").click();
+                    var mic = document.getElementById("mic");
+                    mic.disabled = false;
+                    document.getElementById("miki-speak").remove();
+                    document.getElementById("user-speak").remove();
+                }
+
+            }
+
+            play_audio();
+            document.getElementById("set-ai-talk").click();
+            
+            // try {
+            //     au.src = prompt_path+"/"+xhr.response["prompts"];
+            //     au.play();
+            // } catch (error) {
+            //     au.src = prompt_path+"/retry1.wav";
+            //     au.play();
+            // }
+            
+            // document.getElementById("set-ai-talk").click();
+
+            // au.addEventListener("ended", function() {
+            //     document.getElementById("set-ai-default").click();
+            //     var mic = document.getElementById("mic");
+            //     mic.disabled = false;
+            // });
+        }
+        xhr.onerror = function(e) {
+            au = document.createElement('audio');
+            
+            au.autoplay = true;
+            
+            var prompt_path = "/prompts";
+            au.src = prompt_path+"/retry1.wav";
+            au.play();
+            document.getElementById("set-ai-talk").click();
+
+            au.addEventListener("ended", function() {
+                document.getElementById("set-ai-default").click();
+                var mic = document.getElementById("mic");
+                mic.disabled = false;
+            });
+        }
+
+        var fd = new FormData();
+        fd.append("record_audio", blob, link.download);
+        xhr.open("POST", "/analyzed", true);
+        const meta_csrf = document.getElementsByName("csrf-token");
+        let csrf_content = meta_csrf[0].content;
+        xhr.setRequestHeader('X-CSRF-Token', csrf_content);
+        xhr.responseType = "json";
+        xhr.send(fd);
+    }
+
+    function add_listening_icon(){
+        var icon = document.createElement('img');
+        icon.src = "/audio-wave.gif";
+        icon.id = "listen-icon";
+        icon.style.background = "rgba(255,255,255, 0.5)";
+        icon.style.padding = "10px 15px";
+        icon.style.borderRadius = "26px"
+        var div = document.getElementById("div-listening-icon");
+        div.append(icon);
+    }
+
+    function remove_listening_icon(){
+        var icon = document.getElementById("listen-icon");
+        icon.remove();
+    }
+
+    
+    
+
+</script>

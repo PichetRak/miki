@@ -1,0 +1,27 @@
+<table id="forum-datatable" class="table-content" data-source="<%= forum_list_path(format: :json) %>" >
+    <thead>
+        <tr>
+            <th>
+                <div class="tag-filter">
+                    <span>Tag(s): </span>
+                    <%= button_tag "ทั้งหมด", type: "button", value: 0, class: "btn-tag-filter active", onclick: "active_filter(this)", data: {action:"click->forum#filter"} %>
+                    <% @tag.each do |t| %>
+                        <%= button_tag t.tag_th, type: "button", value: t.id, class: "btn-tag-filter", onclick: "active_filter(this)", data: {action:"click->forum#filter"} %>
+                    <% end %>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    function active_filter(that){
+        if (that.classList.contains('active')){
+            that.classList.remove('active');
+        }else{
+            that.classList.add('active');
+        }
+    }
+</script>

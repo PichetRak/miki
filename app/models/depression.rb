@@ -1,0 +1,2 @@
+class Depression < ApplicationRecord
+end

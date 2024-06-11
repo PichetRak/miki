@@ -1,0 +1,63 @@
+<style>
+  #btn-logout{ display: none !important; }
+  nav{ display: none !important }
+</style>
+
+<div class="bg-login"></div>
+<div class="text-center div-logo">
+  <img src="/mnr_logo-removebg.png" class="rounded" alt="Logo" width="150" height="150">
+</div>
+<div class="container text-center grid-login">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6 div-login-box" >
+        <%= form_for :change_password, url: login_update_password_path(format: :json, id: @user["id"]), method: :POST do |f| %>
+            <div class="mb-3 row">
+                <label for="username" class="col-sm-3 col-form-label title-signup">ชื่อผู้ใช้: </label>
+                <div class="col-sm-9">
+                    <%= f.text_field :username, value: @user["username"], class: "form-control", required: true %>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="password" class="col-sm-3 col-form-label title-signup">รหัสผ่าน: </label>
+                <div class="col-sm-9">
+                    <%= f.password_field :password, class: "form-control", required: true %>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="firstname" class="col-sm-3 col-form-label title-signup">ชื่อ: </label>
+                <div class="col-sm-9">
+                    <%= f.text_field :firstname, value: @user["firstname"], class: "form-control", disabled: true %>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="lastname" class="col-sm-3 col-form-label title-signup">นามสกุล: </label>
+                <div class="col-sm-9">
+                    <%= f.text_field :lastname, value: @user["lastname"], class: "form-control", disabled: true %>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="classroom" class="col-sm-3 col-form-label title-signup">ชั้นปี: </label>
+                <div class="col-sm-9">
+                    <%= f.text_field :classroom, value: @user["classroom"], class: "form-control", disabled: true %>
+                </div>
+            </div>
+             <div class="mb-3 row">
+                <label for="email" class="col-sm-3 col-form-label title-signup">E-mail: </label>
+                <div class="col-sm-9">
+                    <%= f.text_field :email, value: @user["email"], class: "form-control", placeholder: "example@gmail.com" %>
+                </div>
+            </div>
+             <div class="mb-3 row">
+                <label for="phone_number" class="col-sm-3 col-form-label title-signup">เบอร์โทรศัพท์: </label>
+                <div class="col-sm-9">
+                    <%= f.text_field :phone_number, value: @user["phone_number"], class: "form-control" %>
+                </div>
+            </div>
+            <%= f.submit "Update", class: "btn btn-primary", id: "btn_signup" %>
+            <%# link_to "Cancel", root_path(), class: "btn btn_cancel" %>
+        <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

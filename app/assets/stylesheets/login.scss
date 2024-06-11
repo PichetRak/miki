@@ -1,0 +1,43 @@
+
+.bg-login{
+    position: absolute;
+    top: 0;
+    background-image: linear-gradient(180deg, #ffffff, #E87216);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.div-logo{
+    margin-top: 10%;
+}
+
+.div-login-box{
+    margin: auto;
+    background-color: rgba(255,255,255,.7);
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#btn_login, #btn_signup{
+    background-color: #E87216;
+    border: 1px solid #E87216;
+    color: #fff;
+    // margin-bottom: 20px;
+}
+
+// .btn_cancle{
+//     background-color: #fff;
+//     border: 1px solid #7e7e7e !important;
+//     color: #7e7e7e;
+//     margin-bottom: 20px;
+// }
+
+.text-title, .title-signup{
+    float: left;
+    text-align: left;
+    margin-top: 20px;
+}

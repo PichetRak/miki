@@ -1,0 +1,67 @@
+canvas#ai-character{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#mic{
+    padding: 25px;
+    position: absolute;
+    bottom: -15px;
+    border-radius: 50px;
+    border: 2px solid #eeeeee;
+    background: #eeeeee;
+    color: #c4c4c4;
+    display: inline-grid;
+    z-index: 99;
+}
+
+#mic:disabled:hover{
+    padding: 25px;
+    position: absolute;
+    bottom: -15px;
+    border-radius: 50px;
+    border: 2px solid #eeeeee;
+    background: #eeeeee;
+    display: inline-grid;
+    z-index: 99;
+    color: #c4c4c4;
+    cursor: default;
+}
+
+#mic_off {
+    position: absolute;
+    bottom: -15px;
+    cursor: pointer;
+    padding: 25px;
+    border: 2px solid #eeeeee;
+    color: #c4c4c4;
+    border-radius: 50px;
+    z-index: 99;
+}
+
+#mic:hover, #mic_off:hover{
+    border-radius: 50px;
+    background: #c4c4c4;
+    color: #fff;
+}
+
+.div-audio{
+    visibility: hidden;
+}
+
+#div-listening-icon{
+    z-index: 99;
+    position: fixed;
+    top:20%;
+    left: 40%;
+}
+
+.speak-txt{
+    background: rgba(255,255,255,0.4);
+    border-radius: 10px;
+    position: fixed;
+    padding: 10px;
+    max-width: 500px;
+    font-weight: 500;
+}

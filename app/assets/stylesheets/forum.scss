@@ -1,0 +1,184 @@
+table.table-content{
+    width: 100% !important;
+    margin: 20px 0px;
+}
+
+.tag-filter{
+    margin: 10px;
+}
+
+#comment-datatable > tbody td, #forum-datatable > tbody td{
+    padding: 15px;
+    display: inline-flex;
+    vertical-align: middle;
+    height: 130px;
+    background: #FFFFFF !important;
+    border: none !important;
+    color: black;
+    border-radius: 20px;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+}
+
+// tr.odd, tr.even{
+//     border: 1px solid #E3E3E3;
+//     border-radius: 15px !important;
+// }
+
+// td{
+//     padding: 15px;
+//     display: inline-flex;
+// }
+
+.div-user-pic{
+    width: 80px;
+    height: 80px;
+    border: 2px solid #E3E3E3;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 7px;
+}
+
+.div-question-data{
+    padding: 10px;
+    border-left: 1px solid #E3E3E3;
+    margin-left : 20px;
+    width: 100%;
+    position: relative;
+}
+
+.text-question{
+    color: black;
+    font-weight: bold;
+    text-decoration: none
+}
+
+.div-count-comment{
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+}
+
+.count-comment{
+    color: black;
+    text-decoration: none
+}
+
+.form-comment{
+    margin: 20px 0px;
+}
+
+.div-btn-submit{
+    float: right;
+    margin: 20px 0px 20px 20px;
+}
+
+.div-forum-create-container{
+    background-color: rgba(255,255,255,1);
+    padding: 20px;
+    border-radius: 20px;
+    border: none;
+}
+
+.forum-line{
+    margin: auto;
+    color: #7e7e7e;
+    margin-top: 40px;
+}
+
+.btn-tag-filter{
+    background: #7e7e7e;
+    border: 1px solid #7e7e7e;
+    border-radius: 10px;
+    padding: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.btn-tag-filter.active{
+    background: #E87216;
+    border: 1px solid #E87216;
+    color: #FFFFFF;
+}
+
+.updated-time-forum{
+    font-size: 14px;
+    float: right;
+}
+
+.text-bg-tag{
+    background: #E87216;
+    border: 1px solid #E87216;
+} 
+
+.text-bg-tag.tag-1{
+    background: #493829 !important;
+    border: 1px solid #493829 !important;
+}
+.text-bg-tag.tag-2{
+    background: #816C5B !important;
+    border: 1px solid #816C5B !important;
+}
+.text-bg-tag.tag-3{
+    background: #A9A18C !important;
+    border: 1px solid #A9A18C !important;
+}
+.text-bg-tag.tag-4{
+    background: #613318 !important;
+    border: 1px solid #613318 !important;
+}
+.text-bg-tag.tag-5{
+    background: #855723 !important;
+    border: 1px solid #855723 !important;
+}
+.text-bg-tag.tag-6{
+    background: #B99C6B !important;
+    border: 1px solid #B99C6B !important;
+}
+.text-bg-tag.tag-7{
+    background: #8F3B1B !important;
+    border: 1px solid #8F3B1B !important;
+}
+.text-bg-tag.tag-8{
+    background: #D57500 !important;
+    border: 1px solid #D57500 !important;
+}
+.text-bg-tag.tag-9{
+    background: #493829 !important;
+    border: 1px solid #493829 !important;
+}
+.text-bg-tag.tag-10{
+    background: #DBCA69 !important;
+    border: 1px solid #DBCA69 !important;
+}
+
+.link-question:hover{
+    color: #E87216 !important;
+}
+
+.select2-container--default .select2-selection--multiple{
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+    height: 100% !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color: #A9A18C !important;
+    border: 1px solid #A9A18C !important;
+    color: white !important;
+}
+
+.select2.select2-container.select2-container--default{
+    width: 50% !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+    color: white !important;
+    border-right: 1px solid white !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover{
+    background-color: #A9A18C !important;
+    color: #DF2E08 !important;
+    border-right: 1px solid white !important;
+}

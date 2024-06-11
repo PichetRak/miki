@@ -1,0 +1,104 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+
+body{
+    margin-top: 56px;
+    background-color: #F0F0F0;
+}
+.container-fluid{ justify-content: normal !important; }
+.navbar{
+    height: 56px !important;
+}
+.nav-link{
+    color: #ffffff !important;
+    padding-right: 100px;
+}
+
+.div-body-content{
+    padding-top: 30px;
+}
+
+#btn-logout{
+    position: absolute;
+    right: 10px;
+    top: 15%;
+    background: none;
+    border: none;
+    color: #eeeeee;
+    z-index: 99;
+    display: block;
+    cursor: pointer;
+}
+
+#btn-logout:hover{
+    color: #DF2E08;
+    transition: 10;
+    cursor: pointer;
+}
+
+.offcanvas.offcanvas-first {
+    top: 0;
+    left: 0;
+    width: var(--bs-offcanvas-width);
+    border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+    // transform: translateX(100%);
+}
+
+.btn-mnr{
+    background-color: #E87216 !important;
+    border: 1px solid #E87216 !important;
+    color: #ffffff !important;
+}
+
+.btn_cancel{
+    background-color: #fff;
+    border: 1px solid #7e7e7e !important;
+    color: #7e7e7e;
+    // margin-bottom: 20px;
+}
+
+.pagination{
+    float: right !important;
+}
+
+.page-link.active, .active > .page-link{
+    background-color: #E87216 !important;
+    border: 1px solid #E87216 !important;
+    color: #ffffff !important;
+}
+
+.div-alert-message{
+    width: 300px;
+}
+
+.div-alert{
+    margin-bottom: 0px !important;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.btn-close-alert{
+    right: 10px;
+    position: absolute;
+}
+
+.btn-close-alert:active{
+    border: none;
+}
